@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const WeatherData = () => {
-  const [search, setSearch] = useState("delhi");
+  const [search, setSearch] = useState("kolkata");
   const [data, setData] = useState([]);
   const [input, setInput] = useState("");
   let componentMounted = true;
@@ -9,7 +9,7 @@ const WeatherData = () => {
   useEffect(() => {
     const fetchWeather = async () => {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=811f23709d4da521a86fcafe08b5e842`
+        `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=8005438b68f211374b49077dd3b0c07b`
       );
       if (componentMounted) {
         setData(await response.json());
@@ -68,7 +68,7 @@ const WeatherData = () => {
     <div>
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-md-4">
+          <div className="col-md-8">
             <div className="card text-white text-center border-0">
               <img
                 src={`https://source.unsplash.com/600x900/?${data.weather[0].main}`}
@@ -82,14 +82,16 @@ const WeatherData = () => {
                       type="search"
                       className="form-control"
                       placeholder="Search Your City Here..."
-                      aria-label="Search City"
+                      aria-label="Search Your City Here..."
                       aria-describedby="basic-addon2"
                       name="search"
                       value={input}
                       onChange={(event) => setInput(event.target.value)}
                       required
                     />
-                    <button type="submit">Submit</button>
+                    <button type="submit" className="input-group-text" id="basic-addon2">
+                      <i className="fas fa-search"></i>
+                    </button>
                   </div>
                 </form>
                 <div className="bg-dark bg-opacity-50 py-3 rounded">
@@ -99,7 +101,6 @@ const WeatherData = () => {
                     <br />
                     {time}
                   </p>
-
                   <hr />
                   <i className={`fas ${emoji} fa-4x`}></i>
                   <h1 className="fw-bolder mb-3">{temp} &deg;C</h1>
